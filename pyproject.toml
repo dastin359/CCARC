@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ccarc"
+version = "0.2.0"
+description = "Driving coding agents at ARC-AGI, inside a guardrail that makes the result checkable"
+# **Declared, not implied.** Without these fields an installed copy reports
+# licence, author and readme as UNKNOWN, however many files sit in the tree.
+# A licence a packager cannot read is not one it can honour.
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Dastin" }]
+requires-python = ">=3.11"
+dependencies = ["numpy", "pillow"]
+
+# **The command a user types.** Without this the package installs and nothing
+# runs: an importable library and no entry point is not what a harness is for.
+[project.scripts]
+ccarc = "ccarc.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# **Assets are not code and setuptools will not guess.** The doctrines, the
+# workspace templates and the toolkit the ARC-AGI-2 solver imports are read at
+# runtime by path. Without these patterns they are missing from a non-editable
+# install, and only from that one -- a checkout reads them off the source tree,
+# so the gap appears exactly where it is hardest to notice.
+[tool.setuptools.package-data]
+"ccarc.arc_2" = ["assets/*.md", "assets/*.py", "assets/*.sh"]
+"ccarc.arc_2._vendor" = ["*.md"]
+"ccarc.arc_3" = ["assets/*.md", "assets/*.py", "*.md"]

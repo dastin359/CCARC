@@ -1,0 +1,49 @@
+# **Credentials never belong in this repo.**
+# Verified with `git check-ignore`, not by reading this file.
+**/.credentials.json
+**/.claude.json
+**/.claude.json.known-good
+.cli-config/
+.claude/
+*.credentials
+.env
+.env.*
+
+# **Run artifacts NEVER live here.** They carry human baselines, winning
+# routes and solver notes.
+evidence/
+runs/
+clean_rollouts*/
+ccarc*-sweep*/
+*.jsonl
+*.jsonl.gz
+trace.state.json
+shared_card.json
+scorecard.json
+
+# build artifacts -- `pip install .` leaves a full copy of the package under
+# build/, which a commit would otherwise ship a second time.
+build/
+dist/
+*.whl
+
+# scratch
+.pytest_cache/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+paper/
+
+# **ARC-AGI-2 run artifacts carry real puzzle content.** A workspace holds the
+# task's own train pairs, rendered grids, the solver's candidate outputs and its
+# notes. None of it may be committed. Verified with `git check-ignore`.
+cc_runs/
+**/.ccarc/
+**/task/
+**/solution/
+**/_pkg/
+result.json
+summary.json
+initial_prompt.md
